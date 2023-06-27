@@ -1,11 +1,14 @@
 <?php 
+require_once 'Livre.php';
 class Auteur{  //creation de la classe Auteur
     private string $_nom;
-    private string $_prénom;
+    private string $_prenom;
+    private array $_bibliographie; // tableau qui contient les livres
 
 public function __construct(string $nom, string $prénom){
     $this->_nom=$nom;
-    $this->_prénom=$prénom;
+    $this->_prenom=$prénom;
+    $this->_bibliographie=[];
 }
 
 public function getNom(){
@@ -15,20 +18,26 @@ public function setNom(string $nom){
     $this->_nom=$nom;
 }
 public function getPrénom(){
-    return $this->_prénom;
+    return $this->_prenom;
 }
-public function setPrénom(string $prénom){
-    $this->_prénom=$prénom;
+public function setPrénom(string $prenom){
+    $this->_prenom=$prenom;
 }
-// fonction qui parcoure un tableau de livre et qui compare l'auteur a $this si ca coincide elle affiche les informations
-public function afficherBibliographie(array $tab){  
-    echo "Livres de ".$this->_prénom." ".$this->_nom.".<br>"."<br>";
-    foreach ($tab as $livre){ 
-        if ($livre->getAuteur()==$this){
-            echo $livre->getTitre()." (".$livre->getAnnée().
+public function getBibliographie(){
+    return $this->_bibliographie;
+}
+public function setBibliographie(Livre $bibliographie){ //fonction qui ajoute les l'objet de type " livre " donner au tableau _bibliographie de l'auteur
+    array_push($this->_bibliographie, $bibliographie);
+}
+// fonction qui affiche les information de tout les livres dans le tableau _bibliographie de l'auteur
+public function afficherBibliographie(){  
+    $liste= "Livres de ".$this->_prenom." ".$this->_nom.".<br>"."<br>";
+    foreach ($this->_bibliographie as $livre){ 
+            $liste.= $livre->getTitre()." (".$livre->getAnnee().
             ") : ".$livre->getNbpages()." pages / ".$livre->getPrix()." €"."<br>";
         }
-    }}
+    return $liste;
+}
 }
 
 ?>

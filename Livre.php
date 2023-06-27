@@ -1,18 +1,20 @@
 
     <?php 
+    require_once 'Auteur.php';
     class Livre{ //Creation de la classe livre
         private string $_titre;
         private int $_nbpages;
-        private int $_année;
+        private int $_annee;
         private float $_prix;
         private Auteur $_auteur;
 
-    function __construct(string $titre,int $nbpages,int $année,float $prix ,Auteur $auteur){ // constructeur
+    function __construct(string $titre,int $nbpages,int $annee,float $prix ,Auteur $auteur){ // constructeur
         $this->_titre=$titre;
         $this->_nbpages=$nbpages;
-        $this->_année=$année;
+        $this->_annee=$annee;
         $this->_prix=$prix;
         $this->_auteur=$auteur;
+        $auteur->setBibliographie($this); //l'objet crée est directement ajouter dans le tableau associer a l'autre donné
     }
     //getters et setters
     public function getTitre(){
@@ -27,11 +29,11 @@
     public function setNbpages(int $nbpages){
         $this->_nbpages=$nbpages;
     }
-    public function getAnnée(){
-        return $this->_année;
+    public function getAnnee(){
+        return $this->_annee;
     }
-    public function setAnnée(int $année){
-        $this->_année=$année;
+    public function setAnnee(int $annee){
+        $this->_annee=$annee;
     }
     public function getAuteur(){
         return $this->_auteur;
