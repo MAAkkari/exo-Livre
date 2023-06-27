@@ -47,5 +47,9 @@
     public function setPrix(float $prix){
         $this->_prix=$prix;
     } 
+    function __toString(){ //fonction qui affiche les caracteristique du livre dans le bon format quand on essaye de l'afficher
+    return $this->_titre." (".$this->_annee.
+    ") : ".$this->_nbpages." pages / ".$this->_prix." €"."<br>";
     }
+}
     ?>
